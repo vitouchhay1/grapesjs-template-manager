@@ -18,12 +18,12 @@ export default (editor, opts = {}) => {
         if (!firebase.apps.length) {
             firebase.initializeApp({ apiKey, authDomain, projectId, ...opts.firebaseConfig });
             db = firebase.firestore();
-            db.settings(dbSettings);
+            try{ db.settings(dbSettings); }catch(e){}
         }
         else {
             firebase.app();
             db = firebase.firestore();
-            db.settings(dbSettings);
+            try{ db.settings(dbSettings); }catch(e){}
         }
 
         const callback = () => {
